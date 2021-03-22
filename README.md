@@ -24,8 +24,8 @@
     <a href="https://github.com/cthoyt/unittest-templates/blob/main/LICENSE">
         <img alt="PyPI - License" src="https://img.shields.io/pypi/l/unittest-templates" />
     </a>
-    <a href='https://unittest_templates.readthedocs.io/en/latest/?badge=latest'>
-        <img src='https://readthedocs.org/projects/unittest_templates/badge/?version=latest' alt='Documentation Status' />
+    <a href='https://unit-test-templates.readthedocs.io/en/latest/?badge=latest'>
+        <img src='https://readthedocs.org/projects/unit-test-templates/badge/?version=latest' alt='Documentation Status' />
     </a>
     <a href="https://zenodo.org/badge/latestdoi/350466742">
       <img src="https://zenodo.org/badge/350466742.svg" alt="DOI">
