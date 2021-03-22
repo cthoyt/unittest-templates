@@ -31,21 +31,14 @@
 
 Write less unittest boilerplate.
 
-## 💪 Getting Started
-
-> TODO show in a very small amount of space the **MOST** useful thing your package can do.
-Make it as short as possible! You have an entire set of docs for later.
-
 ## ⬇️ Installation
 
-<!-- Uncomment this section after your first ``tox -e finish``
 The most recent release can be installed from
 [PyPI](https://pypi.org/project/unittest_templates/) with:
 
 ```bash
 $ pip install unittest_templates
 ```
--->
 
 The most recent code and data can be installed directly from GitHub with:
 
