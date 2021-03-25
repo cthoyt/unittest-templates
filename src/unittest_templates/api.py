@@ -60,6 +60,7 @@ class TestsTestCase(Generic[T], unittest.TestCase):
 
     def test_testing(self):
         """Check that there is a test for all subclasses."""
+        self.assertIsNotNone(getattr(self, 'base_cls'), msg=f'base_cls not set on {self.__class__}')
         to_test = set(get_subclasses(self.base_cls)).difference(self.skip_cls)
         if self.skip_cls is not None:
             to_test.difference_update(self.skip_cls)
