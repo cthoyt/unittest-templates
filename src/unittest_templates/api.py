@@ -61,13 +61,13 @@ class TestsTestCase(Generic[T], unittest.TestCase):
     def test_testing(self):
         """Check that there is a test for all subclasses."""
         self.assertIsNotNone(getattr(self, 'base_cls'), msg=f'base_cls not set on {self.__class__}')
-        to_test = set(get_subclasses(self.base_cls)).difference(self.skip_cls)
+        to_test = set(get_subclasses(self.base_cls))
         if self.skip_cls is not None:
             to_test.difference_update(self.skip_cls)
         tested = {
             test_cls.cls
             for test_cls in get_subclasses(self.base_test)
-            if hasattr(test_cls, "cls")
+            if hasattr(test_cls, "cls")  # avoid mid-level classes
         }
         not_tested = to_test.difference(tested)
         self.assertEqual(set(), not_tested, msg=f'Some subclasses of {self.base_cls} were not tested.')
