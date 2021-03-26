@@ -24,9 +24,9 @@ class GenericTestCase(Generic[T], unittest.TestCase):
     def setUp(self) -> None:
         """Set up the generic testing method."""
         self.pre_setup_hook()
-        kwargs = self.kwargs or {}
-        kwargs = self._pre_instantiation_hook(kwargs=dict(kwargs))
-        self.instance = self.cls(**kwargs)  # type: ignore
+        kwargs = dict(self.kwargs or {})
+        self.kwargs = self._pre_instantiation_hook(kwargs=kwargs)
+        self.instance = self.cls(**self.kwargs)  # type: ignore
         self.post_instantiation_hook()
 
     def pre_setup_hook(self) -> None:
