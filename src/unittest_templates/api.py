@@ -67,7 +67,7 @@ class TestsTestCase(Generic[T], unittest.TestCase):
             self.fail(msg=dedent(f'''\
                 The class variable `base_cls` was not set on {self.__class__}. If you have implemented
                 a subclass of unittest_template.TestsTestCase, make sure you do it by only importing
-                unittest_template, then accessing it with the dot operator. Do NOT do 
+                unittest_template, then accessing it with the dot operator. Do NOT do
                 `from unittest_template import TestsTestCase`, otherwise your testing harness might
                 collect it as a stand-alone test and try to run it, which will always result in this
                 failure.
