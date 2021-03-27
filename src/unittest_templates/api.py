@@ -26,6 +26,12 @@ class GenericTestCase(Generic[T], unittest.TestCase):
 
     def setUp(self) -> None:
         """Set up the generic testing method."""
+        # do not execute abstract tests
+        try:
+            self.cls
+        except AttributeError:
+            raise unittest.SkipTest(f"No cls in {self.__class__}") from None
+
         self.pre_setup_hook()
         kwargs = self.kwargs or {}
         kwargs = self._pre_instantiation_hook(kwargs=dict(kwargs))
