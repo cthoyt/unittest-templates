@@ -3,6 +3,7 @@
 """Generic test cases."""
 
 import unittest
+from textwrap import dedent
 from typing import Any, ClassVar, Collection, Generic, Iterable, Mapping, MutableMapping, Optional, Type, TypeVar
 
 __all__ = [
@@ -60,8 +61,18 @@ class TestsTestCase(Generic[T], unittest.TestCase):
 
     def test_testing(self):
         """Check that there is a test for all subclasses."""
-        self.assertIsNotNone(getattr(self, 'base_cls'), msg=f'base_cls not set on {self.__class__}')
-        to_test = set(get_subclasses(self.base_cls))
+        try:
+            to_test = set(get_subclasses(self.base_cls))
+        except AttributeError:
+            self.fail(msg=dedent(f'''\
+                The class variable `base_cls` was not set on {self.__class__}. If you have implemented
+                a subclass of unittest_template.TestsTestCase, make sure you do it by only importing
+                unittest_template, then accessing it with the dot operator. Do NOT do 
+                `from unittest_template import TestsTestCase`, otherwise your testing harness might
+                collect it as a stand-alone test and try to run it, which will always result in this
+                failure.
+            '''))
+
         if self.skip_cls is not None:
             to_test.difference_update(self.skip_cls)
         tested = {
