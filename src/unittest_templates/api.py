@@ -3,11 +3,13 @@
 """Generic test cases."""
 
 import unittest
+import warnings
 from textwrap import dedent
 from typing import Any, ClassVar, Collection, Generic, Iterable, Mapping, MutableMapping, Optional, Type, TypeVar
 
 __all__ = [
     'GenericTestCase',
+    'MetaTestCase',
     'TestsTestCase',
 ]
 
@@ -52,7 +54,7 @@ def get_subclasses(cls: Type[X]) -> Iterable[Type[X]]:
         yield subclass
 
 
-class TestsTestCase(Generic[T], unittest.TestCase):
+class MetaTestCase(Generic[T], unittest.TestCase):
     """A generic test for tests."""
 
     base_cls: ClassVar[Type[T]]
@@ -82,3 +84,15 @@ class TestsTestCase(Generic[T], unittest.TestCase):
         }
         not_tested = to_test.difference(tested)
         self.assertEqual(set(), not_tested, msg=f'Some subclasses of {self.base_cls} were not tested.')
+
+
+class TestsTestCase(MetaTestCase):
+    """A backwards compatible wrapper of MetaTestCase."""
+
+    def setUp(self):
+        """Set up the test case."""
+        warnings.warn(
+            'unittest_templates.TestsTestCase has been renamed to unittest_tempaltes.MetaTestCase',
+            DeprecationWarning,
+        )
+        super().setUp()
