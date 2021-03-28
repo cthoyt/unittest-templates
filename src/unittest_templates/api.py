@@ -55,6 +55,10 @@ class GenericTestCase(Generic[T], unittest.TestCase):
     def post_instantiation_hook(self) -> None:
         """Perform actions after instantiation."""
 
+    def test_instance(self):
+        """Trivially check the instance matches the class."""
+        self.assertIsInstance(self.instance, self.cls)
+
 
 def get_subclasses(cls: Type[X]) -> Iterable[Type[X]]:
     """Get all subclasses.
