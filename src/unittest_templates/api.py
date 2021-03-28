@@ -26,18 +26,15 @@ class GenericTestCase(Generic[T], unittest.TestCase):
 
     def setUp(self) -> None:
         """Set up the generic testing method."""
-        # do not execute abstract tests
-        try:
-            self.cls
-        except AttributeError:
-            raise unittest.SkipTest(dedent(f"""\
-                The class variable `cls` was not set on {self.__class__}. If you have implemented
-                a subclass of unittest_template.GenericTestCase, make sure you do it by only importing
-                unittest_template, then accessing it with the dot operator. Do NOT do
-                `from unittest_template import GenericTestCase`, otherwise your testing harness might
-                collect it as a stand-alone test and try to run it, which will always result in this
-                failure.
-            """)) from None
+        if not hasattr(self, 'cls'):
+            self.skipTest(dedent(f"""\
+                The class variable `cls` was not set on {self.__class__}.
+                If you have implemented a subclass of :class:`unittest_template.GenericTestCase`,
+                make sure you do it by only importing :mod:`unittest_template`, then accessing it
+                with the dot operator. Do NOT do ``from unittest_template import GenericTestCase``,
+                otherwise your testing harness might collect it as a stand-alone test and try to
+                run it, which will always result in this failure.
+            """))
 
         self.pre_setup_hook()
         kwargs = self.kwargs or {}
