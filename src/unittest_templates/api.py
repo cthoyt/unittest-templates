@@ -26,6 +26,19 @@ class GenericTestCase(Generic[T], unittest.TestCase):
 
     def setUp(self) -> None:
         """Set up the generic testing method."""
+        # do not execute abstract tests
+        try:
+            self.cls
+        except AttributeError:
+            raise unittest.SkipTest(dedent(f"""\
+                The class variable `cls` was not set on {self.__class__}. If you have implemented
+                a subclass of unittest_template.GenericTestCase, make sure you do it by only importing
+                unittest_template, then accessing it with the dot operator. Do NOT do
+                `from unittest_template import GenericTestCase`, otherwise your testing harness might
+                collect it as a stand-alone test and try to run it, which will always result in this
+                failure.
+            """)) from None
+
         self.pre_setup_hook()
         kwargs = self.kwargs or {}
         self.instance_kwargs = self._pre_instantiation_hook(kwargs=dict(kwargs))
@@ -41,6 +54,10 @@ class GenericTestCase(Generic[T], unittest.TestCase):
 
     def post_instantiation_hook(self) -> None:
         """Perform actions after instantiation."""
+
+    def test_instance(self):
+        """Trivially check the instance matches the class."""
+        self.assertIsInstance(self.instance, self.cls)
 
 
 def get_subclasses(cls: Type[X]) -> Iterable[Type[X]]:
