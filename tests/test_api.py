@@ -28,4 +28,4 @@ class MetaLetterTestCase(unittest_templates.MetaTestCase):
 
 
 class SkipperTestCase(unittest_templates.GenericTestCase[BaseLetter]):
-    """A test case that should automatically skip because no base_cls was defined."""
+    """A test case that should automatically skip because no ``cls`` was defined."""

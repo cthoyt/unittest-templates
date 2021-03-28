@@ -30,7 +30,7 @@ class GenericTestCase(Generic[T], unittest.TestCase):
         try:
             self.cls
         except AttributeError:
-            raise unittest.SkipTest(dedent(f"""
+            raise unittest.SkipTest(dedent(f"""\
                 The class variable `cls` was not set on {self.__class__}. If you have implemented
                 a subclass of unittest_template.GenericTestCase, make sure you do it by only importing
                 unittest_template, then accessing it with the dot operator. Do NOT do
