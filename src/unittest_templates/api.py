@@ -31,7 +31,7 @@ X = TypeVar("X")
 class GenericTestCase(Generic[T], unittest.TestCase):
     """Generic tests."""
 
-    cls: ClassVar[Type[T]]
+    cls: ClassVar[Type[T]]  # type:ignore
     kwargs: ClassVar[Optional[Mapping[str, Any]]] = None
     instance: T
 
@@ -86,9 +86,9 @@ def get_subclasses(cls: Type[X]) -> Iterable[Type[X]]:
 class MetaTestCase(Generic[T], unittest.TestCase):
     """A generic test for tests."""
 
-    base_cls: ClassVar[Type[T]]
-    base_test: ClassVar[Type[GenericTestCase[T]]]
-    skip_cls: ClassVar[Optional[Collection[T]]] = None
+    base_cls: ClassVar[Type[T]]    # type:ignore
+    base_test: ClassVar[Type[GenericTestCase[T]]]  # type:ignore
+    skip_cls: ClassVar[Optional[Collection[T]]] = None  # type:ignore
 
     def test_testing(self):
         """Check that there is a test for all subclasses."""

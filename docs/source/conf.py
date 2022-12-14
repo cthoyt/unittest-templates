@@ -197,7 +197,7 @@ texinfo_documents = [
         "unittest_templates",
         "Unittest Templates Documentation",
         author,
-        "Charles Tapley Hoyt",
+        "Charles Tapley Hoyt and Max Berrendorf",
         "Write less unittest boilerplate.",
         "Miscellaneous",
     ),
