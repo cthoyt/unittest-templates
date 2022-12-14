@@ -1,6 +1,7 @@
-Unit Test Templates |release| Documentation
-===========================================
-
+Unittest Templates |release| Documentation
+==========================================
+Table of Contents
+-----------------
 .. toctree::
    :maxdepth: 2
    :caption: Getting Started

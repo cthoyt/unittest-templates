@@ -5,7 +5,7 @@
 from .api import GenericTestCase, MetaTestCase, TestsTestCase
 
 __all__ = [
-    'GenericTestCase',
-    'TestsTestCase',
-    'MetaTestCase',
+    "GenericTestCase",
+    "TestsTestCase",
+    "MetaTestCase",
 ]

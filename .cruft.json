@@ -1,0 +1,19 @@
+{
+  "template": "https://github.com/cthoyt/cookiecutter-snekpack",
+  "commit": "2fb337c8c1f99abcf613f421002168ec2e15ed36",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "package_name": "unittest_templates",
+      "package_name_stylized": "Unittest Templates",
+      "short_description": "Write less unittest boilerplate.",
+      "author_name": "Charles Tapley Hoyt",
+      "author_email": "cthoyt@gmail.com",
+      "github_organization_name": "cthoyt",
+      "github_repository_name": "unittest-templates",
+      "command_line_interface": "false",
+      "_template": "https://github.com/cthoyt/cookiecutter-snekpack"
+    }
+  },
+  "directory": null
+}
