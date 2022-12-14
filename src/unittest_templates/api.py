@@ -5,16 +5,27 @@
 import unittest
 import warnings
 from textwrap import dedent
-from typing import Any, ClassVar, Collection, Generic, Iterable, Mapping, MutableMapping, Optional, Type, TypeVar
+from typing import (
+    Any,
+    ClassVar,
+    Collection,
+    Generic,
+    Iterable,
+    Mapping,
+    MutableMapping,
+    Optional,
+    Type,
+    TypeVar,
+)
 
 __all__ = [
-    'GenericTestCase',
-    'MetaTestCase',
-    'TestsTestCase',
+    "GenericTestCase",
+    "MetaTestCase",
+    "TestsTestCase",
 ]
 
-T = TypeVar('T')
-X = TypeVar('X')
+T = TypeVar("T")
+X = TypeVar("X")
 
 
 class GenericTestCase(Generic[T], unittest.TestCase):
@@ -26,15 +37,19 @@ class GenericTestCase(Generic[T], unittest.TestCase):
 
     def setUp(self) -> None:
         """Set up the generic testing method."""
-        if not hasattr(self, 'cls'):
-            self.skipTest(dedent(f"""\
+        if not hasattr(self, "cls"):
+            self.skipTest(
+                dedent(
+                    f"""\
                 The class variable `cls` was not set on {self.__class__}.
                 If you have implemented a subclass of :class:`unittest_template.GenericTestCase`,
                 make sure you do it by only importing :mod:`unittest_template`, then accessing it
                 with the dot operator. Do NOT do ``from unittest_template import GenericTestCase``,
                 otherwise your testing harness might collect it as a stand-alone test and try to
                 run it, which will always result in this failure.
-            """))
+            """
+                )
+            )
 
         self.pre_setup_hook()
         kwargs = self.kwargs or {}
@@ -80,14 +95,18 @@ class MetaTestCase(Generic[T], unittest.TestCase):
         try:
             to_test = set(get_subclasses(self.base_cls))
         except AttributeError:
-            self.fail(msg=dedent(f'''\
+            self.fail(
+                msg=dedent(
+                    f"""\
                 The class variable `base_cls` was not set on {self.__class__}. If you have implemented
                 a subclass of unittest_template.MetaTestCase, make sure you do it by only importing
                 unittest_template, then accessing it with the dot operator. Do NOT do
                 `from unittest_template import MetaTestCase`, otherwise your testing harness might
                 collect it as a stand-alone test and try to run it, which will always result in this
                 failure.
-            '''))
+            """
+                )
+            )
 
         if self.skip_cls is not None:
             to_test.difference_update(self.skip_cls)
@@ -97,7 +116,9 @@ class MetaTestCase(Generic[T], unittest.TestCase):
             if hasattr(test_cls, "cls")  # avoid mid-level classes
         }
         not_tested = to_test.difference(tested)
-        self.assertEqual(set(), not_tested, msg=f'Some subclasses of {self.base_cls} were not tested.')
+        self.assertEqual(
+            set(), not_tested, msg=f"Some subclasses of {self.base_cls} were not tested."
+        )
 
 
 class TestsTestCase(MetaTestCase):
@@ -106,7 +127,7 @@ class TestsTestCase(MetaTestCase):
     def setUp(self):
         """Set up the test case."""
         warnings.warn(
-            'unittest_templates.TestsTestCase has been renamed to unittest_tempaltes.MetaTestCase',
+            "unittest_templates.TestsTestCase has been renamed to unittest_tempaltes.MetaTestCase",
             DeprecationWarning,
         )
         super().setUp()

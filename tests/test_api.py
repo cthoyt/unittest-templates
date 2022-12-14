@@ -17,7 +17,7 @@ class TestB(constants.TestLetter):
     """Tests for a B."""
 
     cls = B
-    kwargs = dict(name='hello')
+    kwargs = dict(name="hello")
 
 
 class MetaLetterTestCase(unittest_templates.MetaTestCase):
