@@ -86,7 +86,7 @@ def get_subclasses(cls: Type[X]) -> Iterable[Type[X]]:
 class MetaTestCase(Generic[T], unittest.TestCase):
     """A generic test for tests."""
 
-    base_cls: ClassVar[Type[T]]    # type:ignore
+    base_cls: ClassVar[Type[T]]  # type:ignore
     base_test: ClassVar[Type[GenericTestCase[T]]]  # type:ignore
     skip_cls: ClassVar[Optional[Collection[T]]] = None  # type:ignore
 
