@@ -1,20 +1,13 @@
-# -*- coding: utf-8 -*-
-
 """Generic test cases."""
 
 import unittest
 import warnings
+from collections.abc import Collection, Iterable, Mapping, MutableMapping
 from textwrap import dedent
 from typing import (
     Any,
     ClassVar,
-    Collection,
     Generic,
-    Iterable,
-    Mapping,
-    MutableMapping,
-    Optional,
-    Type,
     TypeVar,
 )
 
@@ -31,8 +24,8 @@ X = TypeVar("X")
 class GenericTestCase(Generic[T], unittest.TestCase):
     """Generic tests."""
 
-    cls: ClassVar[Type[T]]  # type:ignore
-    kwargs: ClassVar[Optional[Mapping[str, Any]]] = None
+    cls: ClassVar[type[T]]
+    kwargs: ClassVar[Mapping[str, Any] | None] = None
     instance: T
 
     def setUp(self) -> None:
@@ -54,7 +47,7 @@ class GenericTestCase(Generic[T], unittest.TestCase):
         self.pre_setup_hook()
         kwargs = self.kwargs or {}
         self.instance_kwargs = self._pre_instantiation_hook(kwargs=dict(kwargs))
-        self.instance = self.cls(**self.instance_kwargs)  # type: ignore
+        self.instance = self.cls(**self.instance_kwargs)
         self.post_instantiation_hook()
 
     def pre_setup_hook(self) -> None:
@@ -67,12 +60,12 @@ class GenericTestCase(Generic[T], unittest.TestCase):
     def post_instantiation_hook(self) -> None:
         """Perform actions after instantiation."""
 
-    def test_instance(self):
+    def test_instance(self) -> None:
         """Trivially check the instance matches the class."""
         self.assertIsInstance(self.instance, self.cls)
 
 
-def get_subclasses(cls: Type[X]) -> Iterable[Type[X]]:
+def get_subclasses(cls: type[X]) -> Iterable[type[X]]:
     """Get all subclasses.
 
     :param cls: The ancestor class
@@ -86,26 +79,24 @@ def get_subclasses(cls: Type[X]) -> Iterable[Type[X]]:
 class MetaTestCase(Generic[T], unittest.TestCase):
     """A generic test for tests."""
 
-    base_cls: ClassVar[Type[T]]  # type:ignore
-    base_test: ClassVar[Type[GenericTestCase[T]]]  # type:ignore
-    skip_cls: ClassVar[Optional[Collection[T]]] = None  # type:ignore
+    base_cls: ClassVar[type[T]]
+    base_test: ClassVar[type[GenericTestCase[T]]]
+    skip_cls: ClassVar[Collection[T] | None] = None
 
-    def test_testing(self):
+    def test_testing(self) -> None:
         """Check that there is a test for all subclasses."""
         try:
             to_test = set(get_subclasses(self.base_cls))
         except AttributeError:
             self.fail(
-                msg=dedent(
-                    f"""\
-                The class variable `base_cls` was not set on {self.__class__}. If you have implemented
-                a subclass of unittest_template.MetaTestCase, make sure you do it by only importing
-                unittest_template, then accessing it with the dot operator. Do NOT do
-                `from unittest_template import MetaTestCase`, otherwise your testing harness might
-                collect it as a stand-alone test and try to run it, which will always result in this
-                failure.
-            """
-                )
+                dedent(f"""\
+                The class variable `base_cls` was not set on {self.__class__}. If you have
+                implemented a subclass of unittest_template.MetaTestCase, make sure you do it by
+                only importing unittest_template, then accessing it with the dot operator. Do NOT
+                do `from unittest_template import MetaTestCase`, otherwise your testing harness
+                might collect it as a stand-alone test and try to run it, which will always result
+                in this failure.
+            """)
             )
 
         if self.skip_cls is not None:
@@ -121,13 +112,14 @@ class MetaTestCase(Generic[T], unittest.TestCase):
         )
 
 
-class TestsTestCase(MetaTestCase):
+class TestsTestCase(MetaTestCase[T], Generic[T]):
     """A backwards compatible wrapper of MetaTestCase."""
 
-    def setUp(self):
+    def setUp(self) -> None:
         """Set up the test case."""
         warnings.warn(
             "unittest_templates.TestsTestCase has been renamed to unittest_tempaltes.MetaTestCase",
             DeprecationWarning,
+            stacklevel=2,
         )
         super().setUp()

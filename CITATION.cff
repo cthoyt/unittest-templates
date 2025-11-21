@@ -1,0 +1,9 @@
+cff-version: 1.0.2
+message: "If you use this software, please cite it as below."
+title: "Unittest Templates"
+authors:
+  - name: "Charles Tapley Hoyt"
+  - name: "Max Berrendorf"
+version: 0.1.1-dev
+doi:
+url: "https://github.com/cthoyt/unittest-templates"

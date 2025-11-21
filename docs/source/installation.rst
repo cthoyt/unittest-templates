@@ -1,22 +1,50 @@
-Installation
-============
-The most recent release can be installed from
-`PyPI <https://pypi.org/project/unittest_templates>`_ with:
+##############
+ Installation
+##############
 
-.. code-block:: shell
+The most recent release can be installed from `PyPI
+<https://pypi.org/project/unittest_templates>`_ with uv:
 
-    $ pip install unittest_templates
+.. code-block:: console
 
-The most recent code and data can be installed directly from GitHub with:
+    $ uv pip install unittest_templates
 
-.. code-block:: shell
+or with pip:
 
-    $ pip install git+https://github.com/cthoyt/unittest-templates.git
+.. code-block:: console
 
-To install in development mode, use the following:
+    $ python3 -m pip install unittest_templates
 
-.. code-block:: shell
+*********************
+ Installing from git
+*********************
+
+The most recent code and data can be installed directly from GitHub with uv:
+
+.. code-block:: console
+
+    $ uv pip install git+https://github.com/cthoyt/unittest-templates.git
+
+or with pip:
+
+.. code-block:: console
+
+    $ python3 -m pip install git+https://github.com/cthoyt/unittest-templates.git
+
+****************************
+ Installing for development
+****************************
+
+To install in development mode with uv:
+
+.. code-block:: console
 
     $ git clone git+https://github.com/cthoyt/unittest-templates.git
     $ cd unittest-templates
-    $ pip install -e .
+    $ uv pip install -e .
+
+or with pip:
+
+.. code-block:: console
+
+    $ python3 -m pip install -e .

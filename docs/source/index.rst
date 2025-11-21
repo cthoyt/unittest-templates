@@ -1,17 +1,19 @@
-Unittest Templates |release| Documentation
-==========================================
-Table of Contents
------------------
+############################################
+ Unittest Templates |release| Documentation
+############################################
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Getting Started
-   :name: start
+    :maxdepth: 2
+    :caption: Getting Started
+    :name: start
 
-   installation
-   usage
+    installation
+    usage
 
-Indices and Tables
-------------------
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+********************
+ Indices and Tables
+********************
+
+- :ref:`genindex`
+- :ref:`modindex`
+- :ref:`search`
