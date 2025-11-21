@@ -4,6 +4,6 @@ title: "Unittest Templates"
 authors:
   - name: "Charles Tapley Hoyt"
   - name: "Max Berrendorf"
-version: 0.1.1-dev
+version: 0.1.1
 doi:
 url: "https://github.com/cthoyt/unittest-templates"
