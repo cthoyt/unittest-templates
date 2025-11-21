@@ -81,12 +81,12 @@ class MetaTestCase(Generic[T], unittest.TestCase):
 
     base_cls: ClassVar[type[T]]
     base_test: ClassVar[type[GenericTestCase[T]]]
-    skip_cls: ClassVar[Collection[T] | None] = None
+    skip_cls: ClassVar[Collection[type[T]] | None] = None
 
     def test_testing(self) -> None:
         """Check that there is a test for all subclasses."""
         try:
-            to_test = set(get_subclasses(self.base_cls))
+            to_test: set[type[T]] = set(get_subclasses(self.base_cls))
         except AttributeError:
             self.fail(
                 dedent(f"""\
