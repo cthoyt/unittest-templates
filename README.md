@@ -35,6 +35,67 @@
 
 Write less unittest boilerplate.
 
+## 💪 Getting Started
+
+```python
+import abc
+from unittest_templates import GenericTestCase, MetaTestCase
+
+# this class defines an interface
+class TextProcessorInterface(abc.ABC):
+  @abc.abstractmethod
+  def process(self, text: str) -> str:
+    """Process a text without changing its length."""
+    raise NotImplementedError
+
+# we have three concrete implementations
+class Lower(Base):
+   def process(self, text: str) -> str:
+     return bar.lower()
+
+class Upper(Base):
+   def process(self, text: str) -> str:
+     return bar.upper()
+     
+class Replace(Base):
+   def __init__(self, char: str = "!"):
+     self.char = char
+
+   def process(self, text: str) -> str:
+     return self.char * len(text)
+
+# we define a generic test case, testing compliance with the interface
+class TextProcessorInterfaceTest(GenericTestCase[Interface]):
+  def test_process(self):
+    text = "Hello World!"
+    modified = self.instance.process(text)
+    assert len(text) == len(modified)
+
+# without much effort, we can create tests for the implementing classes
+class ATest(InterfaceTest):
+  cls = A
+
+# we can also add additional specific tests
+class BTest(InterfaceTest):
+  cls = B
+  
+  def test_b(self):
+    assert self.instance.process("hello") == "HELLO"
+
+class CTest(InterfaceTest):
+  cls = C
+
+# we can also test different instantiations
+class CTestQuestion(InterfaceTest):
+  cls = C
+  kwargs = dict(char="?")
+
+# And finally, we can have a test case which makes sure we do not forget any class
+class InterfaceMetaTestCase(MetaTestCase[Interface]):
+  base_test = InterfaceTest
+  base_cls = Interface
+```
+
 ## 🚀 Installation
 
 The most recent release can be installed from
