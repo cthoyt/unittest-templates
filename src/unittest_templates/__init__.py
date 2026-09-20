@@ -1,9 +1,8 @@
 """Write less unittest boilerplate."""
 
-from .api import GenericTestCase, MetaTestCase, TestsTestCase
+from .api import GenericTestCase, MetaTestCase
 
 __all__ = [
     "GenericTestCase",
     "MetaTestCase",
-    "TestsTestCase",
 ]

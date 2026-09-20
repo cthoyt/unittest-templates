@@ -1,7 +1,6 @@
 """Generic test cases."""
 
 import unittest
-import warnings
 from collections.abc import Collection, Iterable, Mapping, MutableMapping
 from textwrap import dedent
 from typing import (
@@ -14,7 +13,6 @@ from typing import (
 __all__ = [
     "GenericTestCase",
     "MetaTestCase",
-    "TestsTestCase",
 ]
 
 T = TypeVar("T")
@@ -110,16 +108,3 @@ class MetaTestCase(unittest.TestCase, Generic[T]):
         self.assertEqual(
             set(), not_tested, msg=f"Some subclasses of {self.base_cls} were not tested."
         )
-
-
-class TestsTestCase(MetaTestCase[T], Generic[T]):
-    """A backwards compatible wrapper of MetaTestCase."""
-
-    def setUp(self) -> None:
-        """Set up the test case."""
-        warnings.warn(
-            "unittest_templates.TestsTestCase has been renamed to unittest_tempaltes.MetaTestCase",
-            DeprecationWarning,
-            stacklevel=2,
-        )
-        super().setUp()
