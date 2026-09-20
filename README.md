@@ -47,7 +47,6 @@ class TextProcessorInterface(abc.ABC):
     @abc.abstractmethod
     def process(self, text: str) -> str:
         """Process a text without changing its length."""
-        raise NotImplementedError
 
 
 # we have three concrete implementations
