@@ -21,7 +21,7 @@ T = TypeVar("T")
 X = TypeVar("X")
 
 
-class GenericTestCase(Generic[T], unittest.TestCase):
+class GenericTestCase(unittest.TestCase, Generic[T]):
     """Generic tests."""
 
     cls: ClassVar[type[T]]
@@ -76,7 +76,7 @@ def get_subclasses(cls: type[X]) -> Iterable[type[X]]:
         yield subclass
 
 
-class MetaTestCase(Generic[T], unittest.TestCase):
+class MetaTestCase(unittest.TestCase, Generic[T]):
     """A generic test for tests."""
 
     base_cls: ClassVar[type[T]]
