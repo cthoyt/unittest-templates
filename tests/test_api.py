@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
-
 """Tests using the intermediate test class."""
+
+from typing import Any, ClassVar
 
 import unittest_templates
 from tests import constants
@@ -17,10 +17,10 @@ class TestB(constants.TestLetter):
     """Tests for a B."""
 
     cls = B
-    kwargs = dict(name="hello")
+    kwargs: ClassVar[dict[str, Any]] = {"name": "hello"}
 
 
-class MetaLetterTestCase(unittest_templates.MetaTestCase):
+class MetaLetterTestCase(unittest_templates.MetaTestCase[BaseLetter]):
     """A meta test for letters."""
 
     base_cls = BaseLetter

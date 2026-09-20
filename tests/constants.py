@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Minimal example classes and test cases."""
 
 import unittest_templates
@@ -16,7 +14,7 @@ class A(BaseLetter):
 class B(BaseLetter):
     """A child class with a non-trivial `__init__`."""
 
-    def __init__(self, name):
+    def __init__(self, name: str) -> None:
         """Initialize the class.
 
         :param name: A name
@@ -27,6 +25,6 @@ class B(BaseLetter):
 class TestLetter(unittest_templates.GenericTestCase[BaseLetter]):
     """A generic test class for letters."""
 
-    def test_instance(self):
+    def test_instance(self) -> None:
         """Test that the letter is a letter."""
         self.assertIsInstance(self.instance, BaseLetter)

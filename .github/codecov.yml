@@ -1,0 +1,4 @@
+# see https://docs.codecov.com/v4.6/docs/codecov-yaml
+ignore:
+  - "src/unittest_templates/__main__.py"
+  - "src/unittest_templates/cli.py"
